@@ -27,11 +27,11 @@ year_select = Select(year_dropdown)
 year_options = year_select.options
 year_select.select_by_visible_text(year_options[1].text)
 
-with open('major-scraper/courses.csv', 'w') as csvfile:
+with open('majors.csv', 'w') as csvfile:
     csvwriter = csv.writer(csvfile)
 
     # we're hard coding the indices here since the department options become stale
-    for i in range(49):
+    for i in range(50):
         department_dropdown = driver.find_element(By.XPATH, '//select[@name="department"]')
         department_select = Select(department_dropdown)
         department_options = department_select.options
@@ -58,6 +58,9 @@ with open('major-scraper/courses.csv', 'w') as csvfile:
             # select the current major
             major_select.select_by_visible_text(major_option.text)
 
+            if major_option.text.find("*") == -1:
+                continue
+
             # wait for courses to load
             time.sleep(2)
 
@@ -81,6 +84,7 @@ with open('major-scraper/courses.csv', 'w') as csvfile:
 
             # write it to the spreadsheet
             course_row.sort()
-            course_row.insert(0, major_option.text)
+            course_row.insert(0, major_option.text[0:major_option.text.find("*")])
+            course_row.insert(1, major_option.text[major_option.text.rfind("(") + 1:major_option.text.rfind(")")])
             csvwriter.writerow(course_row)
 
