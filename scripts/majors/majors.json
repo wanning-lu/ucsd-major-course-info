@@ -1,5 +1,56 @@
 [{
     "core_classes": [
+        "CSE 8B or CSE 11",
+        "CSE 12",
+        "CSE 29 or ECE 15",
+        "CSE 30 or ECE 30",
+        "MATH 20A",
+        "MATH 20B",
+        "MATH 20C or MATH 31BH",
+        "MATH 20D",
+        "MATH 18 or MATH 31AH",
+        "PHYS 2A",
+        "PHYS 2B",
+        "PHYS 2C",
+        "ECE 35",
+        "ECE 45",
+        "ECE 109 or MATH 11",
+        "CSE 140",
+        "CSE 141",
+        "ECE 101",
+        "ECE 108",
+        "ECE 111"
+    ],
+    "name": "Computer Engineering",
+    "code": "CS25",
+    "Open Electives": [
+        2,
+        "any cse/ece LD",
+        "UD"
+    ],
+    "Upper Division Design Project": [
+        1,
+        "CSE 118",
+        "CSE 145",
+        "CSE 147",
+        "CSE 148",
+        "CSE 170",
+        "CSE 176A",
+        "CSE\n176E",
+        "ECE 115",
+        "ECE 140B",
+        "ECE 144",
+        "ECE 191",
+        "ECE 196"
+    ],
+    "Upper Division Electives": [
+        1,
+        "any UD CSE",
+        "ECE class"
+    ]
+},
+{
+    "core_classes": [
         "CSE 100 or CSE 100R",
         "CSE 101",
         "CSE 110",
@@ -175,7 +226,7 @@
     "Statistics": [
         1,
         "MATH 181A",
-        "Math 183",
+        "MATH 183",
         "ECON 120A",
         "ECE 109",
         "CSE 103"

@@ -18,7 +18,7 @@ def make_json(csvFilePaths, jsonFilePath):
                 # Convert each row into a dictionary 
                 # and add it to data
                 for row in csvReader:
-                    if row[0] != "Computer Science":
+                    if row[1] != "CS26" and row[1] != "CS25":
                         continue
 
                     data['core_classes'] = []
@@ -75,8 +75,8 @@ def make_json(csvFilePaths, jsonFilePath):
     
         
          
-csvFilePath1 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/majors/majors.csv'
-jsonFilePath = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/scripts/majors/CS26.json'
+csvFilePath1 = r'/Users/wanninglu/Documents/Professional/ucsd-major-course-info/majors/majors.csv'
+jsonFilePath = r'/Users/wanninglu/Documents/Professional/ucsd-major-course-info/scripts/majors/majors.json'
  
 # Call the make_json function
 make_json([csvFilePath1], jsonFilePath)

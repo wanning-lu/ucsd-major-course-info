@@ -1,6 +1,7 @@
 import csv
 import json
 import re
+import sys, os
 import glob
 
 def make_json(csvFilePaths, jsonFilePath):
@@ -12,7 +13,6 @@ def make_json(csvFilePaths, jsonFilePath):
     with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
         for csvFilePath in csvFilePaths:
             with open(csvFilePath, encoding='utf-8') as csvf:
-                jsonf.write('[')
                 csvReader = csv.DictReader(csvf)
                 
                 # Convert each row into a dictionary 
@@ -44,16 +44,36 @@ def make_json(csvFilePaths, jsonFilePath):
                     jsonf.write(',\n')
 
                     data = {}
-                
-                jsonf.write(']')
+
+filePath = '/Users/wanninglu/Documents/Professional/ucsd-major-course-info/courses/edited/' # change this to your file path!
+jsonFilePath = '/Users/wanninglu/Documents/Professional/ucsd-major-course-info/scripts/courses/courses.json' # change this too
+
+
+
+# create one massive json file with all course data
+if len(sys.argv) == 1:
+    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
+        jsonf.write('[')
+        make_json([filePath + course_code for course_code in os.listdir(filePath)], jsonFilePath)
+        jsonf.write(']')
     
-        
+# choose a specific file(s)
+else:
+    for course_code in sys.argv[1:]:
+        if course_code.upper() + '.csv' not in os.listdir(filePath):
+            print("erm...that course code doesn't exist!")
+    with open(jsonFilePath, 'w', encoding='utf-8') as jsonf:
+        jsonf.write('[')
+        for course_csv in sys.argv[1:]:
+            make_json([filePath + course_csv], jsonFilePath)
+        jsonf.write(']')
+   
          
-csvFilePath1 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/CSE.csv'
-csvFilePath2 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/MATH.csv'
-csvFilePath3 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/ECE.csv'
-csvFilePath4 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/DSC.csv'
-jsonFilePath = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/scripts/courses/CSE.json'
+# csvFilePath1 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/CSE.csv'
+# csvFilePath2 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/MATH.csv'
+# csvFilePath3 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/ECE.csv'
+# csvFilePath4 = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/courses/edited/DSC.csv'
+# jsonFilePath = r'/Users/chezzie/Documents/Professional/ucsd-major-course-info/scripts/courses/CSE.json'
  
-# Call the make_json function
-make_json([csvFilePath1, csvFilePath2, csvFilePath3, csvFilePath4], jsonFilePath)
+# # Call the make_json function
+# make_json([csvFilePath1, csvFilePath2, csvFilePath3, csvFilePath4], jsonFilePath)
